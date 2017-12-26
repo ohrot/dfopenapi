@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/ohrot/dfopenapi#readme",
   "dependencies": {
-    "ajax-request": "^1.2.3"
+    "axios": "^0.17.1"
   }
 }
