@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/ohrot/dfopenapi/issues"
   },
-  "homepage": "https://github.com/ohrot/dfopenapi#readme"
+  "homepage": "https://github.com/ohrot/dfopenapi#readme",
+  "dependencies": {
+    "ajax-request": "^1.2.3"
+  }
 }
