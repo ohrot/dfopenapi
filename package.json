@@ -1,0 +1,29 @@
+{
+  "name": "dfopenapi",
+  "version": "1.0.0",
+  "description": "api wrapper for Dungeon and Fighterⓒ (dnf@korea) OpenAPI (powered by Neople OpenAPI) : support URL encoding, server name parsing, and ajax",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohrot/dfopenapi.git"
+  },
+  "keywords": [
+    "dnf",
+    "open",
+    "api",
+    "dungeon",
+    "and",
+    "fighter",
+    "df",
+    "wrapper"
+  ],
+  "author": "ohrot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ohrot/dfopenapi/issues"
+  },
+  "homepage": "https://github.com/ohrot/dfopenapi#readme"
+}
