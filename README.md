@@ -40,7 +40,7 @@ api.character.search(
 );
 
 api.character.info.equip(
-    {server: 'bakal;, cid: 'ccae5367270d0c2516cfb92df1d14ed3'}, 
+    {server: 'bakal', cid: 'ccae5367270d0c2516cfb92df1d14ed3'}, 
     function (res) {
         console.log(res);
     }
