@@ -1,0 +1,110 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/ubuntu/.nvm/versions/node/v6.12.0/bin/node',
+1 verbose cli   '/home/ubuntu/.nvm/versions/node/v6.12.0/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.10
+3 info using node@v6.12.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/ubuntu/workspace/backend/script/node_modules/dfopenapi',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/ubuntu/.npm/dfopenapi/1.0.0/package.tgz not in flight; packing
+9 verbose correctMkdir /home/ubuntu/.npm correctMkdir not in flight; initializing
+10 info lifecycle dfopenapi@1.0.0~prepublish: dfopenapi@1.0.0
+11 silly lifecycle dfopenapi@1.0.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/home/ubuntu/.npm/dfopenapi/1.0.0/package.tgz',
+12 verbose tar pack   '/home/ubuntu/workspace/backend/script/node_modules/dfopenapi' ]
+13 verbose tarball /home/ubuntu/.npm/dfopenapi/1.0.0/package.tgz
+14 verbose folder /home/ubuntu/workspace/backend/script/node_modules/dfopenapi
+15 verbose addLocalTarball adding from inside cache /home/ubuntu/.npm/dfopenapi/1.0.0/package.tgz
+16 verbose correctMkdir /home/ubuntu/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd dfopenapi@1.0.0
+18 verbose afterAdd /home/ubuntu/.npm/dfopenapi/1.0.0/package/package.json not in flight; writing
+19 verbose correctMkdir /home/ubuntu/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /home/ubuntu/.npm/dfopenapi/1.0.0/package/package.json written
+21 silly publish { name: 'dfopenapi',
+21 silly publish   version: '1.0.0',
+21 silly publish   description: 'api wrapper for Dungeon and Fighterⓒ (dnf@korea) OpenAPI (powered by Neople OpenAPI) : support URL encoding, server name parsing, and ajax',
+21 silly publish   main: 'index.js',
+21 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/ohrot/dfopenapi.git' },
+21 silly publish   keywords: [ 'dnf', 'open', 'api', 'dungeon', 'and', 'fighter', 'df', 'wrapper' ],
+21 silly publish   author: { name: 'ohrot' },
+21 silly publish   license: 'MIT',
+21 silly publish   bugs: { url: 'https://github.com/ohrot/dfopenapi/issues' },
+21 silly publish   homepage: 'https://github.com/ohrot/dfopenapi#readme',
+21 silly publish   dependencies: { axios: '^0.17.1' },
+21 silly publish   readme: '# dfopenapi\n\n> api wrapper for [Dungeon and Fighterⓒ](http://df.nexon.com) (dnf@korea) OpenAPI (powered by [Neople OpenAPI](https://developers.neople.co.kr)) : support URL encoding, server name parsing, and ajax\n\n## Getting started\n\n### Installation \n\nUsing npm:\n\n```bash\n$ npm install dfopenapi\n```\n\n### Integration\n\n```node.js\nvar apikey = <apikey>; // published by neople\nvar dfopenapi = require(\'dfopenapi\');\nvar api = dfopenapi({key:apikey});\n```\n\n\nin short, you can serve apikey as string\n```node.js\nvar api = require(\'dfopenapi\')(<apikey>);\n```\n\nExample:\n\n```node.js\nvar apikey = <apikey>;  // published by neople\nvar api = require(\'dfopenapi\')({key:apikey});\n\napi.character.search(\n    {server: \'bakal\', charname: \'DFCAT\'}, \n    function (res) {\n        console.log(res);\n    }\n);\n\napi.character.info.equip(\n    {server: \'bakal\', cid: \'ccae5367270d0c2516cfb92df1d14ed3\'}, \n    function (res) {\n        console.log(res);\n    }\n);\n\napi.auction.search(\n    {itemname: \'폭식\', wordType: \'full\'}, \n    function (res) {\n        console.log(res)\n    }\n);\n\napi.item.detail(\n    {itemId: \'c6a38ab8c7540cfc51ea2b0b8b610fa7\', wordType: \'full\'}, \n    function (res) {\n        console.log(res)\n    }\n);\n```\n\n## API\n\nSupport all apis powered by [![Neople OpenAPI](https://developers.neople.co.kr/contents/apiDocs)](https://developers.neople.co.kr/contents/apiDocs)\n\n* Character Search\n```\ncharacter.search({server: <server>, cname: <charname>[, limit: <limit>, wordType: <wordType>])\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||\n|charname|string|URL encoding<br>[or<br>not](#smart-url-encoding)|Y|||\n|limit|integer|# rows of response||10|100|\n|wordType|string|match / start / full||match||\n\n> array of {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}\n\n* Character Base Info\n```\ncharacter.info.base({server: <server>, cid: <charname>)\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>user defined server name|Y|||\n|cid|string|character unique code<br>(128bit hash)|Y|||\n\n> {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}\n\n* Character Status Info\n```\ncharacter.info.status({server: <server>, cid: <charname>)\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>user defined server name|Y|||\n|cid|string|character unique code<br>(128bit hash)|Y|||\n\n> base info + {buff:[모험단버프, 무제한 길드능력치, 기간제 길드능력치], status:[HP, MP, 힘, 지능,체력, 정신력, 물리 공격, 마법 공격, 독립 공격, 물리 방어, 마법 방어, 물리 크리티컬, 마법 크리티컬, 공격 속도, 캐스팅 속도, 이동 속도, 항마, 적중률, 회피율, HP 회복량, MP 회복량, 경직도, 히트리커버리, 화속성 강화, 화속성 저항, 수속성 강화, 수속성 저항, 명속성 강화, 명속성 저항, 암속성 강화, 암속성 저항  }\n\n* Character Equipment Info\n```\ncharacter.info.equip({server: <server>, cid: <charname>)\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>user defined server name|Y|||\n|cid|string|character unique code<br>(128bit hash)|Y|||\n\n> base info + {equipment:[WEAPON, TITLE, JACKET, SHOULDER, PANTS, SHOES, WAIST, AMULET, WRIST, RING, SUPPORT, MAGIC_STON, EARRING]}\n\n* Character Avatar Info\n```\ncharacter.info.avatar({server: <server>, cid: <charname>)\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>user defined server name|Y|||\n|cid|string|character unique code<br>(128bit hash)|Y|||\n\n> base info + {avatar(array of each avatar)}\n\n* Character Creature Info\n```\ncharacter.info.creature({server: <server>, cid: <charname>)\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>user defined server name|Y|||\n|cid|string|character unique code<br>(128bit hash)|Y|||\n\n* Character Flag Info\n```\ncharacter.info.flag({server: <server>, cid: <charname>)\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>user defined server name|Y|||\n|cid|string|character unique code<br>(128bit hash)|Y|||\n\n* Auction Search\n```\ncharacter.search({server: <server>, cname: <charname>[, limit: <limit>, wordType: <wordType>])\n```\n|parameter|type|description|necessary|default|maximum|\n|:-:|:-:|:-:|:--:|:-:|:-:|\n|server|string|server unique name<br>or<br>user defined server name|Y|||\n|charname|string|URL encoding<br>or<br>not|Y|||\n|limit|integer|# rows of response||10|100|\n|wordType|string|match / start / full||match||\n\n> array of {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}\n\n\n## User Defined Server Name\n\n<code>dfopenapi</code> contains server name parsing through <code>parseServer</code>.\nUnique server name is like \'bakal\', \'cain\', however, you can use user defined server name like \'바칼\'. Even if you can use just \'B\' for server name.\nWanna more, add additional set into <code>parser</code> in <code>parseServer</code> like <code>"dire": "diregie"</code>.\n\n## Smart URL encoding\n\n<code>dfopenapi</code> contains URL Encoding process <code>esc</code> for username/itemname.\nIt use regular expression to check name is URL encoded. If it already already encoded, return string directly. Else, use <code>querystring.escape</code> to URL encoding.\nSo, you don\'t care about name is URL encoded or not.',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '79af7ee9c65cec779459265d7ff4efc9e54c5de7',
+21 silly publish   _id: 'dfopenapi@1.0.0',
+21 silly publish   _shasum: '9ecccaa32a4133f985af16b20c500c094f2f089a',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name dfopenapi
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'dfopenapi',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'dfopenapi',
+26 silly mapToRegistry   name: 'dfopenapi',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/dfopenapi
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /home/ubuntu/.npm/dfopenapi/1.0.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/dfopenapi
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 8:29:49 AM
+33 verbose request using bearer token for auth
+34 verbose request id 857a7b3150e638f6
+35 http request PUT https://registry.npmjs.org/dfopenapi
+36 http 403 https://registry.npmjs.org/dfopenapi
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '91',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Tue, 02 Jan 2018 08:29:49 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-hkg17926-HKG',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1514881789.452519,VS0,VE502',
+37 verbose headers   vary: 'Accept-Encoding, Accept' }
+38 verbose request invalidating /home/ubuntu/.npm/registry.npmjs.org/dfopenapi on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: You cannot publish over the previously published version 1.0.0. : dfopenapi
+40 verbose stack     at makeError (/home/ubuntu/.nvm/versions/node/v6.12.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:302:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/home/ubuntu/.nvm/versions/node/v6.12.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:290:14)
+40 verbose stack     at Request._callback (/home/ubuntu/.nvm/versions/node/v6.12.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:210:14)
+40 verbose stack     at Request.self.callback (/home/ubuntu/.nvm/versions/node/v6.12.0/lib/node_modules/npm/node_modules/request/request.js:187:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/home/ubuntu/.nvm/versions/node/v6.12.0/lib/node_modules/npm/node_modules/request/request.js:1048:10)
+40 verbose stack     at emitOne (events.js:96:13)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/home/ubuntu/.nvm/versions/node/v6.12.0/lib/node_modules/npm/node_modules/request/request.js:969:12)
+41 verbose statusCode 403
+42 verbose pkgid dfopenapi
+43 verbose cwd /home/ubuntu/workspace/backend/script/node_modules/dfopenapi
+44 error Linux 4.9.17-c9
+45 error argv "/home/ubuntu/.nvm/versions/node/v6.12.0/bin/node" "/home/ubuntu/.nvm/versions/node/v6.12.0/bin/npm" "publish"
+46 error node v6.12.0
+47 error npm  v3.10.10
+48 error code E403
+49 error You cannot publish over the previously published version 1.0.0. : dfopenapi
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
