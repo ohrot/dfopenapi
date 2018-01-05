@@ -63,16 +63,16 @@ api.item.detail(
 
 ## API
 
-Support all apis powered by [![Neople OpenAPI](https://developers.neople.co.kr/contents/apiDocs)](https://developers.neople.co.kr/contents/apiDocs)
+Support all apis powered by [Neople OpenAPI](https://developers.neople.co.kr/contents/apiDocs)
 
 * Character Search
 ```
-character.search({server: <server>, cname: <charname>[, limit: <limit>, wordType: <wordType>])
+character.search({server: <server>, cname: <cname>[, limit: <limit>, wordType: <wordType>]})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
-|charname|string|URL encoding<br>[or<br>not](#smart-url-encoding)|Y|||
+|cname|string|character name<br>URL encoding<br>or<br>[not](#smart-url-encoding)|Y|||
 |limit|integer|# rows of response||10|100|
 |wordType|string|match / start / full||match||
 
@@ -80,20 +80,20 @@ character.search({server: <server>, cname: <charname>[, limit: <limit>, wordType
 
 * Character Base Info
 ```
-character.info.base({server: <server>, cid: <charname>)
+character.info.base({server: <server>, cid: <charname>})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
-> {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}
+> {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName, adventrueName, guildId, guildName}
 
 * Character Status Info
 ```
-character.info.status({server: <server>, cid: <charname>)
+character.info.status({server: <server>, cid: <charname>})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
@@ -102,9 +102,9 @@ character.info.status({server: <server>, cid: <charname>)
 
 * Character Equipment Info
 ```
-character.info.equip({server: <server>, cid: <charname>)
+character.info.equip({server: <server>, cid: <charname>})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
@@ -113,9 +113,9 @@ character.info.equip({server: <server>, cid: <charname>)
 
 * Character Avatar Info
 ```
-character.info.avatar({server: <server>, cid: <charname>)
+character.info.avatar({server: <server>, cid: <charname>})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
@@ -124,44 +124,135 @@ character.info.avatar({server: <server>, cid: <charname>)
 
 * Character Creature Info
 ```
-character.info.creature({server: <server>, cid: <charname>)
+character.info.creature({server: <server>, cid: <charname>})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 * Character Flag Info
 ```
-character.info.flag({server: <server>, cid: <charname>)
+character.info.flag({server: <server>, cid: <charname>})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 * Auction Search
 ```
-character.search({server: <server>, cname: <charname>[, limit: <limit>, wordType: <wordType>])
+auction.search({itemId: <itemId>, itemName: <itemName>[, minLevel: <minLevel>, maxLevel: <maxLevel>, rarity: <rarity>, trade: <trade>, limit: <limit>, wordType: <wordType>]})
 ```
-|parameter|type|description|necessary|default|maximum|
+|parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|server|string|server unique name<br>or<br>user defined server name|Y|||
-|charname|string|URL encoding<br>or<br>not|Y|||
+|itemId|string||Y|||
+|itemName|string|item name<br>URL encoding<br>or<br>not|Y|||
+|minLevel|integer|minimum required level||||
+|maxLevel|integer|maximum required level||||
+|rarity|string|item rarity||||
+|minReinforce|integer|minimum reinforce level||||
+|maxReinforce|integer|maximum reinforce level||||
+|minRefine|integer|minimum refine level||||
+|maxRefine|integer|maximum refine level||||
+|unitPrice|string|sort by item unit price<br>asc / desc||||
+|reinforce|string|sort by reinforce level<br>asc / desc||||
+|auctionNo|string|sort by auctionNo<br>asc / desc||||
 |limit|integer|# rows of response||10|100|
 |wordType|string|match / start / full||match||
 
+<code>itemId</code> or <code>itemName</code> is required.
+
+<code>auctionNo: 'asc'</code> is default unless any sort option is defined.
+
+* Auction Detail
+```
+auction.detail({auctionNo: <auctionNo>})
+```
+|parameter|type|description|required|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|auctionNo|string||Y|||
+
+* Item Search
+```
+item.search({itemName: <itemName>[, minLevel: <minLevel>, maxLevel: <maxLevel>, rarity: <rarity>, trade: <trade>, limit: <limit>, wordType: <wordType>]})
+```
+|parameter|type|description|required|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|itemName|string|item name<br>URL encoding<br>or<br>not|Y|||
+|minLevel|integer|minimum required level||||
+|maxLevel|integer|maximum required level||||
+|rarity|string|item rarity||||
+|trade|boolean|can regist auction||false||
+|limit|integer|# rows of response||10|100|
+|wordType|string|match / start / full||match||
+
+* Item Detail
+```
+item.detail({itemId: <itemId>})
+```
+|parameter|type|description|required|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|itemId|string||Y|||
+
+
+
 > array of {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}
 
+## Legacy API in [Officail Homepage](http://df.nexon.com/)
+
+> !! Legacy API is not recommanded. We have no responsiblilty for abusing this legacy api.
+
+```
+character.legacy.api({mode: <mode>, no: <charname>, server: <server>)
+```
+|parameter|type|description|necessary|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|mode|string|search / detail|Y|||
+|no|string|character unique code<br>(128bit hash)<br>|Y|||
+|server|string|server unique name<br>or<br>user defined server name|Y|||
+
+```
+character.legacy.charinfo({no: <charname>, server: <server>)
+```
+|parameter|type|description|necessary|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|no|string|character unique code<br>(128bit hash)<br>|Y|||
+|server|string|server unique name<br>or<br>user defined server name|Y|||
+
+In officail homepage of dungeon and fighter, there is legacy api via <code>http://df.nexon.com/FRM/info/charac_search_api.php</code> for character search and view detail. It is for pure web browser, not for 3-party app like [pris.kr](http://pris.kr).
+
+Legacy api is not need <code>apikey</code>. So, it cannot be controlled by neople and can cause big traffic on neople server, and might access blocked from neople.
+
+Legacy api is not separated by category (equip/avatar/...). Its response contains full information and it has redundant. Legacy api is not supported by Neople API, it is not up-to-date. For example, Neople API update to contain <code>{adventureName, guildId, guildName}</code> in base info in 20180104, however, legacy api is not contains <code>adventrueName</code> which is important for identifing unique user (or account).
+
+Legacy api handles <code>no</code> (<code>charac_no</code> in response) for characterId. But it is different from Neople API's. You must be careful of mix legacy API with Neople API.
+
+Legacy api contains <code>avatar_image</code> and <code>occDate</code>, not supported in Neople API.
+
+DNF Web Avatar renderer(http://avatar.df.nexon.com/) uses <code>charac_no</code> in legacy API, not characterId in Neople API. So, if you want to contain avatar image on your service, you should use legacy API until Neople support avatar image url in Neople API. (Or merge <code>no</code> and <code>characterId</code>).
+
+<code>occDate</code> in <code>stat</code> shows the time recent logout. 
 
 ## User Defined Server Name
 
 <code>dfopenapi</code> contains server name parsing through <code>parseServer</code>.
+
 Unique server name is like 'bakal', 'cain', however, you can use user defined server name like '바칼'. Even if you can use just 'B' for server name.
+
 Wanna more, add additional set into <code>parser</code> in <code>parseServer</code> like <code>"dire": "diregie"</code>.
 
 ## Smart URL encoding
 
 <code>dfopenapi</code> contains URL Encoding process <code>esc</code> for username/itemname.
+
 It use regular expression to check name is URL encoded. If it already already encoded, return string directly. Else, use <code>querystring.escape</code> to URL encoding.
+
 So, you don't care about name is URL encoded or not.
+
+# Patch Note
+
+## 20180105
+
+Include <code>{adventureName, guildId, guildName}</code> and <code>trade</code> property in <code>item.search</code> in 20180104 patch.
+
