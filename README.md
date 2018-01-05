@@ -84,7 +84,7 @@ character.info.base({server: <server>, cid: <charname>})
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|server|string|server unique name<br>or<br>user defined server name|Y|||
+|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 > {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName, adventrueName, guildId, guildName}
@@ -95,7 +95,7 @@ character.info.status({server: <server>, cid: <charname>})
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|server|string|server unique name<br>or<br>user defined server name|Y|||
+|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 > base info + {buff:[모험단버프, 무제한 길드능력치, 기간제 길드능력치], status:[HP, MP, 힘, 지능,체력, 정신력, 물리 공격, 마법 공격, 독립 공격, 물리 방어, 마법 방어, 물리 크리티컬, 마법 크리티컬, 공격 속도, 캐스팅 속도, 이동 속도, 항마, 적중률, 회피율, HP 회복량, MP 회복량, 경직도, 히트리커버리, 화속성 강화, 화속성 저항, 수속성 강화, 수속성 저항, 명속성 강화, 명속성 저항, 암속성 강화, 암속성 저항  }
@@ -106,7 +106,7 @@ character.info.equip({server: <server>, cid: <charname>})
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|server|string|server unique name<br>or<br>user defined server name|Y|||
+|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 > base info + {equipment:[WEAPON, TITLE, JACKET, SHOULDER, PANTS, SHOES, WAIST, AMULET, WRIST, RING, SUPPORT, MAGIC_STON, EARRING]}
@@ -117,7 +117,7 @@ character.info.avatar({server: <server>, cid: <charname>})
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|server|string|server unique name<br>or<br>user defined server name|Y|||
+|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 > base info + {avatar(array of each avatar)}
@@ -128,7 +128,7 @@ character.info.creature({server: <server>, cid: <charname>})
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|server|string|server unique name<br>or<br>user defined server name|Y|||
+|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 * Character Flag Info
@@ -137,17 +137,17 @@ character.info.flag({server: <server>, cid: <charname>})
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|server|string|server unique name<br>or<br>user defined server name|Y|||
+|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
 * Auction Search
 ```
-auction.search({itemId: <itemId>, itemName: <itemName>[, minLevel: <minLevel>, maxLevel: <maxLevel>, rarity: <rarity>, trade: <trade>, limit: <limit>, wordType: <wordType>]})
+auction.search({itemId: <itemId>, itemName: <itemName>[, minLevel: <minLevel>, maxLevel: <maxLevel>, rarity: <rarity>, minReinforce: <minReinforce>, maxReinforce: <maxReinforce>, minRefine: <minRefine>, maxRefine: <maxRefine>, unitPrice: <unitPrice>, reinforce: <reinforce>, auctionNo: <auctionNo>, limit: <limit>, wordType: <wordType>]})
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |itemId|string||Y|||
-|itemName|string|item name<br>URL encoding<br>or<br>not|Y|||
+|itemName|string|item name<br>URL encoding<br>or<br>[not](#smart-url-encoding)|Y|||
 |minLevel|integer|minimum required level||||
 |maxLevel|integer|maximum required level||||
 |rarity|string|item rarity||||
@@ -179,7 +179,7 @@ item.search({itemName: <itemName>[, minLevel: <minLevel>, maxLevel: <maxLevel>, 
 ```
 |parameter|type|description|required|default|maximum|
 |:-:|:-:|:-:|:--:|:-:|:-:|
-|itemName|string|item name<br>URL encoding<br>or<br>not|Y|||
+|itemName|string|item name<br>URL encoding<br>or<br>[not](#smart-url-encoding)|Y|||
 |minLevel|integer|minimum required level||||
 |maxLevel|integer|maximum required level||||
 |rarity|string|item rarity||||
