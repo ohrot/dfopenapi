@@ -199,26 +199,9 @@ item.detail({itemId: <itemId>})
 
 > array of {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}
 
-## Legacy API in [Officail Homepage](http://df.nexon.com/)
+# Legacy API in [Officail Homepage](http://df.nexon.com/)
 
 > !! Legacy API is not recommanded. We have no responsiblilty for abusing this legacy api.
-
-```
-character.legacy.api({mode: <mode>, no: <charname>, server: <server>)
-```
-|parameter|type|description|necessary|default|maximum|
-|:-:|:-:|:-:|:--:|:-:|:-:|
-|mode|string|search / detail|Y|||
-|no|string|character unique code<br>(128bit hash)<br>|Y|||
-|server|string|server unique name<br>or<br>user defined server name|Y|||
-
-```
-character.legacy.charinfo({no: <charname>, server: <server>)
-```
-|parameter|type|description|necessary|default|maximum|
-|:-:|:-:|:-:|:--:|:-:|:-:|
-|no|string|character unique code<br>(128bit hash)<br>|Y|||
-|server|string|server unique name<br>or<br>user defined server name|Y|||
 
 In officail homepage of dungeon and fighter, there is legacy api via <code>http://df.nexon.com/FRM/info/charac_search_api.php</code> for character search and view detail. It is for pure web browser, not for 3-party app like [pris.kr](http://pris.kr).
 
@@ -234,13 +217,51 @@ DNF Web Avatar renderer(http://avatar.df.nexon.com/) uses <code>charac_no</code>
 
 <code>occDate</code> in <code>stat</code> shows the time recent logout. 
 
+## Character API
+```
+character.legacy.axios({mode: <mode>, no: <charname>, server: <server>})
+```
+|parameter|type|description|necessary|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|mode|string|search / detail|Y|||
+|no|string|character unique code<br>(128bit hash)<br>**Differ from Neople API**|Y|||
+|server|string|server unique name<br>or<br>user defined server name|Y|||
+
+```
+character.legacy.character.info({no: <charac_no>, server: <server>})
+```
+|parameter|type|description|necessary|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|no|string|character unique code<br>(128bit hash)<br>**Differ from Neople API**|Y|||
+|server|string|server unique name<br>or<br>user defined server name|Y|||
+
+## Community API
+```
+character.legacy.request({url: <url>)
+```
+|parameter|type|description|necessary|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|url|string||Y|||
+
+```
+character.legacy.community.api({type: <search_type>, keyword: <keyword>})
+```
+|parameter|type|description|necessary|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|type|string|charac_name / title|Y|||
+|keyword|string|character name / title<br>URL encoding<br>or<br>[not](#smart-url-encoding)|Y|||
+
+For <code>euc-kr</code> decoding, use <code>request</code> insted of <code>axios</code>.
+
+# Addons
+
 ## User Defined Server Name
 
 <code>dfopenapi</code> contains server name parsing through <code>parseServer</code>.
 
 Unique server name is like 'bakal', 'cain', however, you can use user defined server name like '바칼'. Even if you can use just 'B' for server name.
 
-Wanna more, add additional set into <code>parser</code> in <code>parseServer</code> like <code>"dire": "diregie"</code>.
+Wanna more, add additional set into <code>parser</code> in <code>lib/parseServer.js</code> like <code>"dire": "diregie"</code>.
 
 ## Smart URL encoding
 
@@ -255,4 +276,10 @@ So, you don't care about name is URL encoded or not.
 ## 20180105
 
 Include <code>{adventureName, guildId, guildName}</code> and <code>trade</code> property in <code>item.search</code> in 20180104 patch.
+
+## 20180106
+
+Include community capture crawler in official homepage <code>legacy.community.capture</code>
+
+Divide single <code>dfopenapi.js</code> into each modules (<code>api.js</code>, <code>auction.js</code>, <code>character.js</code>, <code>escape.js</code>, <code>item.js</code>, <code>legacy.js</code>, <code>parseServer.js</code>)
 
