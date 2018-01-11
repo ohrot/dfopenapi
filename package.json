@@ -1,6 +1,6 @@
 {
   "name": "dfopenapi",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "api wrapper for Dungeon and Fighterⓒ (dnf@korea) OpenAPI (powered by Neople OpenAPI) : support URL encoding, server name parsing, and ajax",
   "main": "index.js",
   "scripts": {
