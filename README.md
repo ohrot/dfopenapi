@@ -76,7 +76,20 @@ character.search({server: <server>, cname: <cname>[, limit: <limit>, wordType: <
 |limit|integer|# rows of response||10|100|
 |wordType|string|match / start / full||match||
 
-> array of {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}
+> [{characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName}, ...]
+
+* Character Timeline
+```
+character.timeline({server: <server>, cid: <charname>[, limit: <limit>, wordType: <wordType>]})
+```
+|parameter|type|description|required|default|maximum|
+|:-:|:-:|:-:|:--:|:-:|:-:|
+|server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
+|cid|string|character unique code<br>(128bit hash)|Y|||
+|limit|integer|# rows of response||10|100|
+|code|string|[timeline class code](https://developers.neople.co.kr/contents/guide/pages/all#타임라인-코드)||||
+
+> base info + {timeline: {nextUrl, rows: [{code, name, date, data}, ...]}}
 
 * Character Base Info
 ```
@@ -201,7 +214,7 @@ item.detail({itemId: <itemId>})
 
 # Legacy API in [Officail Homepage](http://df.nexon.com/)
 
-> !! Legacy API is not recommanded. We have no responsiblilty for abusing this legacy api.
+> **!! Legacy API is not recommanded. We have no responsiblilty for abusing this legacy api.**
 
 In officail homepage of dungeon and fighter, there is legacy api via <code>http://df.nexon.com/FRM/info/charac_search_api.php</code> for character search and view detail. It is for pure web browser, not for 3-party app like [pris.kr](http://pris.kr).
 
@@ -218,6 +231,8 @@ DNF Web Avatar renderer(http://avatar.df.nexon.com/) uses <code>charac_no</code>
 <code>occDate</code> in <code>stat</code> shows the time recent logout. 
 
 ## Character API
+
+* Common API for Search / Detail
 ```
 character.legacy.axios({mode: <mode>, no: <charname>, server: <server>})
 ```
@@ -227,6 +242,7 @@ character.legacy.axios({mode: <mode>, no: <charname>, server: <server>})
 |no|string|character unique code<br>(128bit hash)<br>**Differ from Neople API**|Y|||
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 
+* Character Detail
 ```
 character.legacy.character.info({no: <charac_no>, server: <server>})
 ```
@@ -236,6 +252,8 @@ character.legacy.character.info({no: <charac_no>, server: <server>})
 |server|string|server unique name<br>or<br>user defined server name|Y|||
 
 ## Community API
+
+* Common API for Community
 ```
 character.legacy.request({url: <url>)
 ```
@@ -243,6 +261,7 @@ character.legacy.request({url: <url>)
 |:-:|:-:|:-:|:--:|:-:|:-:|
 |url|string||Y|||
 
+* Capture Board
 ```
 character.legacy.community.api({type: <search_type>, keyword: <keyword>})
 ```
