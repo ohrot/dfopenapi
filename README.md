@@ -100,7 +100,7 @@ character.info.base({server: <server>, cid: <charname>})
 |server|string|server unique name<br>or<br>[user defined server name](#user-defined-server-name)|Y|||
 |cid|string|character unique code<br>(128bit hash)|Y|||
 
-> {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName, adventrueName, guildId, guildName}
+> {characterId, characterName, level, jobId, jobGrowId, jobName, jobGrowName, adventureName, guildId, guildName}
 
 * Character Status Info
 ```
@@ -290,7 +290,7 @@ It use regular expression to check name is URL encoded. If it already already en
 
 So, you don't care about name is URL encoded or not.
 
-# Patch Note
+# Release Note
 
 ## 20180105
 
@@ -302,3 +302,6 @@ Include community capture crawler in official homepage <code>legacy.community.ca
 
 Divide single <code>dfopenapi.js</code> into each modules (<code>api.js</code>, <code>auction.js</code>, <code>character.js</code>, <code>escape.js</code>, <code>item.js</code>, <code>legacy.js</code>, <code>parseServer.js</code>)
 
+## 20180111
+
+Include <code>character.timeline</code> in 20180111 patch.
