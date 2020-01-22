@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/ohrot/dfopenapi#readme",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.2",
     "iconv": "^2.3.0",
     "request": "^2.83.0",
